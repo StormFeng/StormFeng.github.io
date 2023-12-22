@@ -116,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -127,7 +127,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -156,6 +156,395 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/02/25/Java-final%E5%85%B3%E9%94%AE%E5%AD%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="魏">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="魏的个人博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 魏的个人博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/02/25/Java-final%E5%85%B3%E9%94%AE%E5%AD%97/" class="post-title-link" itemprop="url">Java-final关键字</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-25 10:21:05" itemprop="dateCreated datePublished" datetime="2019-02-25T10:21:05Z">2019-02-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-22 02:24:52" itemprop="dateModified" datetime="2023-12-22T02:24:52Z">2023-12-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h4><pre><code>程序中可能使用到final的三种情况：数据、方法、类
+</code></pre>
+<h5 id="final数据"><a href="#final数据" class="headerlink" title="final数据"></a>final数据</h5><p>有时，数据的恒定不变是很有用的，比如：</p>
+<ol>
+<li>一个永不改变的编译时常量</li>
+<li>一个在运行时被初始化的值，而你不希望它被改变</li>
+</ol>
+<p>在Java中，这类常量必须是基本数据类型，并且以关键字<code>final</code>表示。在对这个常量进行定义的时候，必须对其进行赋值。</p>
+<p>一个既是<code>static</code>又是<code>final</code>的域只占据一段不能改变的存储空间。</p>
+<p><strong>对于基本数据类型，<code>final</code>使数值恒定不变；而对于对象引用，<code>final</code>使引用恒定不变。一旦引用被初始化指向一个对象，就无法再把它改为指向另一个对象。然而，对象其自身却是可以被修改的。</strong></p>
+<h5 id="空白final"><a href="#空白final" class="headerlink" title="空白final"></a>空白final</h5><p>Java允许生成“空白final”,所谓空白final是指声明为<code>final</code>但又未给定初值的域。无论什么情况，编译器都确保空白final在使用前必须被初始化。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Test extends Object&#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Person p = new Person(1);</span><br><span class="line">        System.out.println(p.getAge());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Person&#123;</span><br><span class="line">    private final int age;</span><br><span class="line"></span><br><span class="line">    public Person(int age) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="final参数"><a href="#final参数" class="headerlink" title="final参数"></a>final参数</h5><p>Java允许在参数列表中以声明的方式将参数指为<code>final</code>。<strong>这意味这你无法在方法中更改参数引用所指向的对象</strong>。</p>
+<h5 id="final方法"><a href="#final方法" class="headerlink" title="final方法"></a>final方法</h5><p>使用<code>final</code>方法的原因有两个。第一个原因是把方法锁住，以防任何继承类修改它的含义。这是出于设计的考虑：想要确保在继承中使方法行为保持不变，并且不会被覆盖。<br>第一个原因是效率。</p>
+<h5 id="final和private关键字"><a href="#final和private关键字" class="headerlink" title="final和private关键字"></a>final和private关键字</h5><p>类中所有的<code>private</code>方法都隐式的指定为<code>final</code>。由于无法取用<code>private</code>方法，所以也就无法覆盖它。可以对<code>private</code>方法添加<code>final</code>修饰词，但这并不能给该方法增加任何额外的意义。</p>
+<h5 id="final类"><a href="#final类" class="headerlink" title="final类"></a>final类</h5><p>当将某个类的整体定义为<code>final</code>时，就表明了你不打算继承该类，而且也不允许别人这样做。换句话说，你并不希望它有子类。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/02/21/Java-%E6%B7%B1%E5%A4%8D%E5%88%B6%E5%92%8C%E6%B5%85%E5%A4%8D%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="魏">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="魏的个人博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 魏的个人博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/02/21/Java-%E6%B7%B1%E5%A4%8D%E5%88%B6%E5%92%8C%E6%B5%85%E5%A4%8D%E5%88%B6/" class="post-title-link" itemprop="url">Java-深复制和浅复制</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-21 14:50:32" itemprop="dateCreated datePublished" datetime="2019-02-21T14:50:32Z">2019-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-22 02:24:52" itemprop="dateModified" datetime="2023-12-22T02:24:52Z">2023-12-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在Java中，我们可以通过继承<code>Cloneable</code>接口，实现<code>clone()</code>方法来实现对自定义类的复制。</p>
+<h4 id="浅复制"><a href="#浅复制" class="headerlink" title="浅复制"></a>浅复制</h4><p>当类中只有基本数据类型时，只需要继承<code>Cloneable</code>接口，不用重写<code>clone()</code>方法即可实现对象的复制：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Child implements Cloneable &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected Object clone() throws CloneNotSupportedException &#123;</span><br><span class="line">        return super.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Test &#123;</span><br><span class="line">    public static void main(String[] args) throws CloneNotSupportedException &#123;</span><br><span class="line">        Child child = new Child();</span><br><span class="line">        Child clone = (Child) child.clone();</span><br><span class="line">        System.out.println(child);</span><br><span class="line">        System.out.println(clone);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 输入</span><br><span class="line">Child@4554617c</span><br><span class="line">Child@74a14482</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure>
+<p>上面的代码中，<code>clone</code>是由<code>child</code>复制得到的，打印<code>child</code>和<code>clone</code>，从输出结果可以看出，<code>child</code>和<code>clone</code>的十六进制哈希码并不相同，说明它们是两个不同的对象。<br>当类中有引用数据类型时，会出现什么情况呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public class Toy implements Cloneable&#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected Object clone() throws CloneNotSupportedException &#123;</span><br><span class="line">        return super.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Child implements Cloneable &#123;</span><br><span class="line">    private Toy toy;</span><br><span class="line"></span><br><span class="line">    public Toy getToy() &#123;</span><br><span class="line">        return toy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setToy(Toy toy) &#123;</span><br><span class="line">        this.toy = toy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected Object clone() throws CloneNotSupportedException &#123;</span><br><span class="line">        return super.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Test extends Object&#123;</span><br><span class="line">    public static void main(String[] args) throws CloneNotSupportedException &#123;</span><br><span class="line">        Child child = new Child();</span><br><span class="line">        child.setToy(new Toy());</span><br><span class="line">        Child clone = (Child) child.clone();</span><br><span class="line">        System.out.println(child);</span><br><span class="line">        System.out.println(clone);</span><br><span class="line"></span><br><span class="line">        System.out.println(child.getToy());</span><br><span class="line">        System.out.println(clone.getToy());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Child@4554617c</span><br><span class="line">Child@74a14482</span><br><span class="line">Toy@1540e19d</span><br><span class="line">Toy@1540e19d</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure>
+<p><code>Child.class</code>中有一个引用数据类型的<code>toy</code>变量，通过<code>setToy()</code>赋值<code>toy</code>变量，分别打印<code>child</code>和<code>clone</code>，<code>child.getToy()</code>和<code>clone.getToy()</code>，可以看出，<code>child</code>和<code>clone</code>的哈希码不相同，是两个不同的对象，而<code>child.getToy()</code>和<code>clone.getToy()</code>的哈希码相同，得到的是同一个对象。<br>从上面的结果可以看出，在没有重写<code>clone()</code>方法的情况下，复制，只是对引用的复制。</p>
+<h4 id="深复制"><a href="#深复制" class="headerlink" title="深复制"></a>深复制</h4><p>为了解决上面的问题，我们需要重写<code>clone()</code>方法，来实现深复制。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public class Toy implements Cloneable&#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected Object clone() throws CloneNotSupportedException &#123;</span><br><span class="line">        return super.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Child implements Cloneable &#123;</span><br><span class="line">    private Toy toy;</span><br><span class="line"></span><br><span class="line">    public Toy getToy() &#123;</span><br><span class="line">        return toy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setToy(Toy toy) &#123;</span><br><span class="line">        this.toy = toy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected Object clone() throws CloneNotSupportedException &#123;</span><br><span class="line">        Child newChild = (Child) super.clone();</span><br><span class="line">        newChild.setToy((Toy) this.toy.clone());</span><br><span class="line">        return newChild;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Test extends Object&#123;</span><br><span class="line">    public static void main(String[] args) throws CloneNotSupportedException &#123;</span><br><span class="line">        Child child = new Child();</span><br><span class="line">        child.setToy(new Toy());</span><br><span class="line">        Child clone = (Child) child.clone();</span><br><span class="line">        System.out.println(child);</span><br><span class="line">        System.out.println(clone);</span><br><span class="line"></span><br><span class="line">        System.out.println(child.getToy());</span><br><span class="line">        System.out.println(clone.getToy());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Child@4554617c</span><br><span class="line">Child@74a14482</span><br><span class="line">Toy@1540e19d</span><br><span class="line">Toy@677327b6</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure>
+<p>在<code>clone()</code>方法中，对引用数据类型进行复制，然后再赋值给本类对应的变量，便可以得到一个全新的对象，由打印的结果可以看出，<code>child</code>和<code>clone</code>是两个互不相干的不同的对象。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/28/Python-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="魏">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="魏的个人博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 魏的个人博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/12/28/Python-%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">Python-多线程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-12-27 16:23:03" itemprop="dateCreated datePublished" datetime="2018-12-27T16:23:03Z">2018-12-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-22 02:24:52" itemprop="dateModified" datetime="2023-12-22T02:24:52Z">2023-12-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="使用多线程的两种方式"><a href="#使用多线程的两种方式" class="headerlink" title="使用多线程的两种方式"></a>使用多线程的两种方式</h4><ol>
+<li>直接使用<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">arg</span>):</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello %s&#x27;</span> % arg)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    Thread(target=func, args=(i, )).start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="comment"># hello 0</span></span><br><span class="line"><span class="comment"># hello 1</span></span><br><span class="line"><span class="comment"># hello 4</span></span><br><span class="line"><span class="comment"># hello 2</span></span><br><span class="line"><span class="comment"># hello 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure></li>
+<li>继承 Thread 类<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyThread</span>(<span class="title class_ inherited__">Thread</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, arg</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.arg = arg</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="built_in">print</span>(self.arg)</span><br><span class="line"></span><br><span class="line">MyThread(<span class="number">10</span>).start()</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="comment"># 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<p><strong>在同一个进程中，多个线程之间的数据是共享的:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"></span><br><span class="line">count = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    <span class="keyword">global</span> count</span><br><span class="line">    count -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">t = Thread(target=func)</span><br><span class="line">t.start()</span><br><span class="line">t.join()</span><br><span class="line"><span class="built_in">print</span>(count)</span><br></pre></td></tr></table></figure>
+<p>可以看出，在线程中通过<code>global</code>的方式引入全局变量，并进行了减法操作，然后主线程中打印<code>count</code>的值，<code>count</code>的值确实被改变，说明在一个进程中，全局变量在多个线程之间是共享的。</p>
+<p><strong>进程和线程的区别</strong>:</p>
+<ul>
+<li>进程是最小的内存分配单位</li>
+<li>线程是操作系统调度的最小单位</li>
+<li>进程内至少包含一个线程</li>
+<li>进程中可以开启多个线程</li>
+<li>开启一个线程所需要的时间远远小于开启一个进程</li>
+</ul>
+<hr>
+<h4 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h4><p>和守护进程相似，主线程结束，守护线程会随之结束：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;fuck&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    t = Thread(target=func)</span><br><span class="line">    t.daemon = <span class="literal">True</span></span><br><span class="line">    t.start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
+<p>控制台什么都没有输出，这是因为主线程立即运行完毕，线程t被设置成守护线程，也随着主线程的结束而结束。<br>主线程在其他__非守护进程__运行完毕之后才算执行完毕。因为主线程的结束意味着进程的结束，进程整体的资源都将被回收，而进程必须必须保证非守护线程都运行完毕后才能结束。<br>需要注意的是，守护进程会在主进程结束之后等待其他子进程的结束才结束：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;func&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func2</span>():</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;func2&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    t = Thread(target=func)</span><br><span class="line">    t.daemon = <span class="literal">True</span></span><br><span class="line">    t.start()</span><br><span class="line">    Thread(target=func2).start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="comment"># func</span></span><br><span class="line"><span class="comment"># func2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
+<h4 id="线程锁"><a href="#线程锁" class="headerlink" title="线程锁"></a>线程锁</h4><p>先看一个死锁现象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/27/Python-%E8%BF%9B%E7%A8%8B%E6%B1%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="魏">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="魏的个人博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 魏的个人博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/12/27/Python-%E8%BF%9B%E7%A8%8B%E6%B1%A0/" class="post-title-link" itemprop="url">Python-进程池</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-12-27 15:06:56" itemprop="dateCreated datePublished" datetime="2018-12-27T15:06:56Z">2018-12-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-22 02:24:52" itemprop="dateModified" datetime="2023-12-22T02:24:52Z">2023-12-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>操作系统一次性创建一个属于进程的池子，这个池子能够容纳指定数量的进程，进程结束之后并不会释放内存，而是归还到池子中，等到进程池的再次调度。跟单纯的进程相比，不用再频繁的依赖操作系统的调度，提高了效率。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">index</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello %s&#x27;</span> % index)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    pool = Pool(<span class="number">5</span>)</span><br><span class="line">    pool.<span class="built_in">map</span>(func, <span class="built_in">range</span>(<span class="number">100</span>))</span><br><span class="line">    pool.apply()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="comment"># hello 0</span></span><br><span class="line"><span class="comment"># hello 1</span></span><br><span class="line"><span class="comment"># hello 2</span></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="comment"># hello 99</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>pool.map()</code>默认异步的执行任务，且自带<code>close</code>和<code>join</code>效果。</p>
+<h4 id="apply-和apply-async-方法"><a href="#apply-和apply-async-方法" class="headerlink" title="apply()和apply_async()方法"></a>apply()和apply_async()方法</h4><p><code>appky()</code>方法用于同步提交任务，<code>apply_async()</code>方法用于异步提交任务。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">index</span>):</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello %s&#x27;</span> % index)</span><br><span class="line">    <span class="keyword">return</span> index</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    pool = Pool(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        result = pool.apply(func, args=(i, ))</span><br><span class="line">        <span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="comment"># hello 0</span></span><br><span class="line"><span class="comment"># 0</span></span><br><span class="line"><span class="comment"># hello 1</span></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># hello 2</span></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="comment"># hello 3</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># hello 4</span></span><br><span class="line"><span class="comment"># 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
+<p>从结果可以看出，<code>func()</code>方法按照提交的顺序输出结果，说明<code>apply()</code>方法是同步的。<code>func()</code>函数的返回值就是<code>apply()</code>的返回值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">index</span>):</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello %s&#x27;</span> % index)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    pool = Pool(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        pool.apply_async(func, args=(i, ))</span><br><span class="line">    pool.close()</span><br><span class="line">    pool.join()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出  </span></span><br><span class="line"><span class="comment"># hello 0</span></span><br><span class="line"><span class="comment"># hello 3</span></span><br><span class="line"><span class="comment"># hello 2</span></span><br><span class="line"><span class="comment"># hello 4</span></span><br><span class="line"><span class="comment"># hello 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
+<p>而这里使用<code>apply_async()</code>方法，在控制台可以看出1秒之后，5个结果同时输出，说明执行是异步的。代码中<code>pool.close()</code>方法表示进程池停止接收任务，<code>pool.join()</code>方法感知进程池中任务执行结束。<br><code>apply_async()</code>异步调用，和主进程完全异步，需要手动<code>close</code>和<code>join</code>。<br>代码中开启了5个进程，就算任务数是100、200…个远远多于开启的进程数，系统也只会同时执行5个进程，可以打印出进程id，发现永远是5个不变的进程id在循环执行。<br>如果我们从<code>apply_async()</code>方法中获取返回值会发生什么现象呢：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">index</span>):</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello %s&#x27;</span> % index)</span><br><span class="line">    <span class="keyword">return</span> index</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    pool = Pool(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        result = pool.apply_async(func, args=(i, ))</span><br><span class="line">        <span class="built_in">print</span>(result.get())</span><br><span class="line">    pool.close()</span><br><span class="line">    pool.join()</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 输出hello 0</span></span><br><span class="line"><span class="comment"># 0</span></span><br><span class="line"><span class="comment"># hello 1</span></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># hello 2</span></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="comment"># hello 3</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># hello 4</span></span><br><span class="line"><span class="comment"># 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
+<p>可以看出，异步任务变成了同步，这是因为代码会在<code>result.get()</code>方法阻塞，等待函数<code>func()</code>的返回值，在拿到返回值之后才提交下一个任务。<br>改进：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">index</span>):</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello %s&#x27;</span> % index)</span><br><span class="line">    <span class="keyword">return</span> index</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    pool = Pool(<span class="number">5</span>)</span><br><span class="line">    res_lst = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        result = pool.apply_async(func, args=(i, ))</span><br><span class="line">        res_lst.append(result)</span><br><span class="line">    pool.close()</span><br><span class="line">    pool.join()</span><br><span class="line">    [<span class="built_in">print</span>(res.get()) <span class="keyword">for</span> res <span class="keyword">in</span> res_lst]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="comment"># hello 1</span></span><br><span class="line"><span class="comment"># hello 2</span></span><br><span class="line"><span class="comment"># hello 0</span></span><br><span class="line"><span class="comment"># hello 3</span></span><br><span class="line"><span class="comment"># hello 4</span></span><br><span class="line"><span class="comment"># 0</span></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
+<p>使用<code>map()</code>函数实现同样的效果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">index</span>):</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello %s&#x27;</span> % index)</span><br><span class="line">    <span class="keyword">return</span> index</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    pool = Pool(<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">print</span>(pool.<span class="built_in">map</span>(func, <span class="built_in">range</span>(<span class="number">5</span>)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出hello 2</span></span><br><span class="line"><span class="comment"># hello 0</span></span><br><span class="line"><span class="comment"># hello 3</span></span><br><span class="line"><span class="comment"># hello 4</span></span><br><span class="line"><span class="comment"># hello 1</span></span><br><span class="line"><span class="comment"># [0, 1, 2, 3, 4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
+<h4 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">index</span>):</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello %s&#x27;</span> % index)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;func id:%s&#x27;</span> % os.getpid())</span><br><span class="line">    <span class="keyword">return</span> index</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">callback</span>(<span class="params">res</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;处理%s&#x27;</span> % res)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;callback id:%s&#x27;</span> % os.getpid())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;main id:%s&#x27;</span> % os.getpid())</span><br><span class="line">    pool = Pool(<span class="number">5</span>)</span><br><span class="line">    pool.apply_async(func, args=(<span class="number">1</span>,), callback=callback)</span><br><span class="line">    pool.close()</span><br><span class="line">    pool.join()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="comment"># main id:12288</span></span><br><span class="line"><span class="comment"># hello 1</span></span><br><span class="line"><span class="comment"># func id:12289</span></span><br><span class="line"><span class="comment"># 处理1</span></span><br><span class="line"><span class="comment"># callback id:12288</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
+<p>回调函数<code>callback()</code>接收<code>func()</code>函数的返回值作为自己的参数。从打印的进程id可以看出，<code>callback()</code>函数是在主进程执行的。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -713,508 +1102,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/26/Python-%E8%BF%9B%E7%A8%8B%E9%94%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="魏">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="魏的个人博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 魏的个人博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/26/Python-%E8%BF%9B%E7%A8%8B%E9%94%81/" class="post-title-link" itemprop="url">Python-进程锁</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-25 17:17:59" itemprop="dateCreated datePublished" datetime="2018-12-25T17:17:59Z">2018-12-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-22 02:24:52" itemprop="dateModified" datetime="2023-12-22T02:24:52Z">2023-12-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><p>假设现在余票系统中只有一张票，有10人同时抢票，在没有任何防护措施的情况下，可能会出现意想不到的结果<br><strong>ticket.json</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;count:1&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>主程序</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">buy</span>(<span class="params">index</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;ticket.json&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        ticket = json.load(f)</span><br><span class="line">        time.sleep(<span class="number">0.1</span>)</span><br><span class="line">    <span class="keyword">if</span> ticket[<span class="string">&#x27;count&#x27;</span>] &gt; <span class="number">0</span>:</span><br><span class="line">        ticket[<span class="string">&#x27;count&#x27;</span>] -= <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;第%s位买到票了&#x27;</span> % index)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;第%s位没有买到票了&#x27;</span> % index)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;ticket.json&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        json.dump(ticket, f)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">        Process(target=buy, args=(i, )).start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="comment"># 第0位买到票了</span></span><br><span class="line"><span class="comment"># 第1位买到票了</span></span><br><span class="line"><span class="comment"># 第3位买到票了</span></span><br><span class="line"><span class="comment"># 第2位买到票了</span></span><br><span class="line"><span class="comment"># 第4位买到票了</span></span><br><span class="line"><span class="comment"># 第5位买到票了</span></span><br><span class="line"><span class="comment"># 第6位买到票了</span></span><br><span class="line"><span class="comment"># 第7位买到票了</span></span><br><span class="line"><span class="comment"># 第8位买到票了</span></span><br><span class="line"><span class="comment"># 第9位买到票了</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
-<p>本来只有一张票的，结果10位用户都买到票了，这显然是不符合实际的，这是因为多进程同时操作文件的时候，可能都读到余票为1，然后执行了买票的操作。</p>
-<h4 id="解决方案：加锁"><a href="#解决方案：加锁" class="headerlink" title="解决方案：加锁"></a>解决方案：加锁</h4><p>对一个文件来说，我们不能同时让多个进程访问，想象一下，每个文件都有一把钥匙，当一个进程来访问的时候必须手持钥匙才允许访问，其他的进程则只能等待，访问完之后把钥匙归还，下一个进程才能拿到钥匙再次访问。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Lock</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">buy</span>(<span class="params">index, lock</span>):</span><br><span class="line">    lock.acquire()</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;ticket.json&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        ticket = json.load(f)</span><br><span class="line">        time.sleep(<span class="number">0.1</span>)</span><br><span class="line">    <span class="keyword">if</span> ticket[<span class="string">&#x27;count&#x27;</span>] &gt; <span class="number">0</span>:</span><br><span class="line">        ticket[<span class="string">&#x27;count&#x27;</span>] -= <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;第%s位买到票了&#x27;</span> % index)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;第%s位没有买到票了&#x27;</span> % index)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;ticket.json&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        json.dump(ticket, f)</span><br><span class="line">    lock.release()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    lock = Lock()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">        Process(target=buy, args=(i, lock)).start()</span><br></pre></td></tr></table></figure>
-<p>第一个进程拿到进程锁之后，后面的进程会阻塞在<code>lock.require()</code>方法，直到上一个进程释放进程锁之后，后面的进程才能拿到进程锁继续后面的操作。换句话说，<code>lock.require()</code>和<code>lock.release()</code>之间的代码同一时间只能由一个进程执行。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/26/Python-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="魏">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="魏的个人博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 魏的个人博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/26/Python-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/" class="post-title-link" itemprop="url">Python-守护进程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-25 16:00:18" itemprop="dateCreated datePublished" datetime="2018-12-25T16:00:18Z">2018-12-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-22 02:24:52" itemprop="dateModified" datetime="2023-12-22T02:24:52Z">2023-12-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="没有使用守护进程的例子"><a href="#没有使用守护进程的例子" class="headerlink" title="没有使用守护进程的例子"></a>没有使用守护进程的例子</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">0.5</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;still alive&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    Process(target=func).start()</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;main process&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="comment"># still alive</span></span><br><span class="line"><span class="comment"># still alive</span></span><br><span class="line"><span class="comment"># still alive</span></span><br><span class="line"><span class="comment"># main process</span></span><br><span class="line"><span class="comment"># still alive</span></span><br><span class="line"><span class="comment"># still alive</span></span><br><span class="line"><span class="comment"># still alive</span></span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
-<p>从上面的例子可以看出，当主进程结束的时候，子进程仍然在运行</p>
-<h4 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">0.5</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;still alive&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    p = Process(target=func)</span><br><span class="line">    p.daemon = <span class="literal">True</span></span><br><span class="line">    p.start()</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;main process&#x27;</span>)</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="comment"># still alive</span></span><br><span class="line"><span class="comment"># still alive</span></span><br><span class="line"><span class="comment"># still alive</span></span><br><span class="line"><span class="comment"># main process</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
-<p>可以看出，子进程设置成守护进程后，会随着主进程代码的执行完毕而结束</p>
-<h4 id="结束一个进程、判断进程是否存活"><a href="#结束一个进程、判断进程是否存活" class="headerlink" title="结束一个进程、判断进程是否存活"></a>结束一个进程、判断进程是否存活</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">2</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;still alive&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    p = Process(target=func)</span><br><span class="line">    p.start()</span><br><span class="line">    <span class="built_in">print</span>(p.is_alive())</span><br><span class="line">    p.terminate()</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(p.is_alive())</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 输入</span></span><br><span class="line"><span class="comment"># True</span></span><br><span class="line"><span class="comment"># False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
-<p>子进程运行2秒，在开启子进程之后立刻执行 <code>p.terminate()</code> 关闭这个子进程，<code>p.is_alive()</code>返回一个布尔值，用于判断子进程是否存活。<br><strong>注意，调用<code>terminate()</code>之后立刻调用<code>is_alive()</code>，会得到一个”错误”的结果 <code>True</code> ,这是因为<code>terminate()</code>会向系统请求关闭一个子进程，立刻调用<code>is_alive()</code>系统还没”反应过来”</strong></p>
-<hr>
-<h4 id="总结：进程常用属性和方法"><a href="#总结：进程常用属性和方法" class="headerlink" title="总结：进程常用属性和方法"></a>总结：进程常用属性和方法</h4><p><strong>方法</strong></p>
-<table>
-<thead>
-<tr>
-<th align="center">方法名</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">start()</td>
-<td align="center">开启一个子进程</td>
-</tr>
-<tr>
-<td align="center">join()</td>
-<td align="center">感知一个子进程的结束</td>
-</tr>
-<tr>
-<td align="center">terminate()</td>
-<td align="center">结束一个子进程</td>
-</tr>
-<tr>
-<td align="center">is_alive()</td>
-<td align="center">查看某个子进程是否还在运行</td>
-</tr>
-</tbody></table>
-<p><strong>属性</strong></p>
-<table>
-<thead>
-<tr>
-<th align="center">属性</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">name</td>
-<td align="center">进程名</td>
-</tr>
-<tr>
-<td align="center">pid</td>
-<td align="center">进程id</td>
-</tr>
-<tr>
-<td align="center">daemon</td>
-<td align="center">值为True的时候表示这是一个守护进程，守护进程会随着主进程的结束而结束，一定要在start()方法之前设置</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/20/Django-%E9%AB%98%E7%BA%A7%E8%A7%86%E5%9B%BE%E5%92%8CURL%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="魏">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="魏的个人博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 魏的个人博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/20/Django-%E9%AB%98%E7%BA%A7%E8%A7%86%E5%9B%BE%E5%92%8CURL%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Django 高级视图和URL配置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-20 10:25:17" itemprop="dateCreated datePublished" datetime="2018-12-20T10:25:17Z">2018-12-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-22 02:24:52" itemprop="dateModified" datetime="2023-12-22T02:24:52Z">2023-12-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="URL配置小技巧"><a href="#URL配置小技巧" class="headerlink" title="URL配置小技巧"></a>URL配置小技巧</h3><p>为了解决开发后期视图函数过多，一个一个地导入视图函数很繁琐的问题，可以直接导入views模块自身。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from django.conf.urls import url</span><br><span class="line">from . import views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(&#x27;^$&#x27;, views.index),</span><br><span class="line">    url(&#x27;^hello/$&#x27;, views.hello)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h4 id="具名分组"><a href="#具名分组" class="headerlink" title="具名分组"></a>具名分组</h4><ol>
-<li><h5 id="通过位置参数把片段传给视图："><a href="#通过位置参数把片段传给视图：" class="headerlink" title="通过位置参数把片段传给视图："></a>通过位置参数把片段传给视图：</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from django.conf.urls import url</span><br><span class="line">from . import views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(&#x27;^reviews/([0-9]&#123;4&#125;/([0-9]&#123;2&#125;)$)&#x27;, views.index),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<strong>注意：</strong></li>
-</ol>
-<ul>
-<li>若想捕获URL中的值，要把值放在括号里</li>
-<li>在视图函数中按参数位置接收传递的值</li>
-</ul>
-<p>例如：</p>
-<ul>
-<li>对<code>/reviews/2005/03/</code>的请求，Django调用<code>view.index(request,&#39;2005&#39;,&#39;03&#39;)</code>函数</li>
-</ul>
-<ol start="2">
-<li><h5 id="通过具名分组传递参数"><a href="#通过具名分组传递参数" class="headerlink" title="通过具名分组传递参数"></a>通过具名分组传递参数</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from django.conf.urls import url</span><br><span class="line">from . import views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(&#x27;^reviews/(?P&lt;year&gt;[0-9]&#123;4&#125;/(?P&lt;month&gt;[0-9]&#123;2&#125;)$)&#x27;, views.index),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-这个URL配置跟前一个实现的URL模式完全一样，只不过有一处不同：捕获的值以关键字参数传递给视图函数，而不是位置参数。<br>例如：</li>
-</ol>
-<ul>
-<li>对<code>/reviews/2005/03/</code>的请求，Django调用<code>view.index(request,year=&#39;2005&#39;,month=&#39;03&#39;)</code>函数</li>
-</ul>
-<h4 id="URL配置搜索的范围"><a href="#URL配置搜索的范围" class="headerlink" title="URL配置搜索的范围"></a>URL配置搜索的范围</h4><p>URL配置搜索的是所请求的URL，而且把它视作是普通的Python字符串。搜索的范围不包括GET或POST参数，抑或域名。例如对 <a target="_blank" rel="noopener" href="http://www.example.com/myapp/">http://www.example.com/myapp/</a> 的请求，URL 配置只查找 myapp&#x2F;;对 <a target="_blank" rel="noopener" href="http://www.example.com/myapp/?page=3">http://www.example.com/myapp/?page=3</a> 的请求，URL 配置只查找 myapp&#x2F;。URL 配置不关心请求方法。也就是说，相同 URL 的所有请求方法(POST、GET、HEAD，等等)都交由同一个视图函数处理。</p>
-<h4 id="捕获的参数始终是字符串"><a href="#捕获的参数始终是字符串" class="headerlink" title="捕获的参数始终是字符串"></a>捕获的参数始终是字符串</h4><p>不管正则表达式匹配的是什么类型，捕获的每个参数都以普通的Python字符串传递给视图，因此在视图函数中对参数进行处理时，要注意对接收的参数转型。</p>
-<h4 id="为视图的参数指定默认值"><a href="#为视图的参数指定默认值" class="headerlink" title="为视图的参数指定默认值"></a>为视图的参数指定默认值</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># URL配置</span><br><span class="line">from django.conf.urls import url</span><br><span class="line">form . import views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(&#x27;^review/$&#x27;,views.page),</span><br><span class="line">    url(&#x27;^review/page(?P&lt;num&gt;[0-9]+)&#x27;,views.page)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># 视图函数</span><br><span class="line">def page(request, num=&#x27;1&#x27;):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
-<p>上面两个URL指向同一个视图，在视图函数中为第一个URL设置了默认参数num&#x3D;1。</p>
-<h3 id="反向解析URL"><a href="#反向解析URL" class="headerlink" title="反向解析URL"></a>反向解析URL</h3><p>目前的程序可以从用户请求的URL开始，调用正确的Django视图，并从URL中提取可能需要的参数及其值，传给视图。在项目中，如果我们需要在浏览器显示完整的URL呢？这时，就需要从Django视图对应的标识以及可能传入的参数值开始，获取相应的URl。这个过程就成为反向解析URL。<br>Django在不同的层中提供了执行URL反转所需的工具：</p>
-<ul>
-<li>在模板中，使用url模板标签</li>
-<li>在Python代码中，使用django.core.urlresolvers.reverse()函数</li>
-<li>在处理Django模型实例URL相关的高层代码中，使用get_absolute_url()方法</li>
-</ul>
-<p><strong>使用URL模板标签</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># URL配置</span><br><span class="line">from django.conf.urls import url</span><br><span class="line">from .import views</span><br><span class="line">urlpattern = [</span><br><span class="line">    url(&#x27;^index/([0-9]&#123;4&#125;)/$&#x27;, views.index, name=&#x27;index&#x27;)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># 模板中使用url标签</span><br><span class="line">&#123;% url &#x27;index&#x27; 2018 %&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>在Python代码中，通过reverse()函数获得</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># URL配置</span><br><span class="line">from django.conf.urls import url</span><br><span class="line">from . import views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(&#x27;^index/$&#x27;, views.index),</span><br><span class="line">    url(&#x27;^hello/([0-9]&#123;4&#125;)/$&#x27;, views.hello, name=&#x27;hello&#x27;)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># 视图</span><br><span class="line">from django.http import HttpResponseRedirect, HttpResponse</span><br><span class="line">from django.urls import reverse</span><br><span class="line"></span><br><span class="line">def hello(request, year):</span><br><span class="line">    return HttpResponse(year)</span><br><span class="line">    </span><br><span class="line">def index(request):</span><br><span class="line">    year = 2018</span><br><span class="line">    return HttpResponseRedirect(reverse(&#x27;hello&#x27;, args=(2018, )))</span><br></pre></td></tr></table></figure>
-<p>例如页面链接为<code>http://127.0.0.1:8000/index/2018/</code>，通过以上两种方式得到的url为<code>/index/2018/</code></p>
-<p><strong>某些情况下，视图是通用的，URL和视图时间存在多对一关系，URL反转时视图名称不足以唯一标识。</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/20/Django-%E8%A1%A8%E5%8D%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="魏">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="魏的个人博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 魏的个人博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/20/Django-%E8%A1%A8%E5%8D%95/" class="post-title-link" itemprop="url">Django 表单</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-19 16:34:05" itemprop="dateCreated datePublished" datetime="2018-12-19T16:34:05Z">2018-12-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-22 02:24:52" itemprop="dateModified" datetime="2023-12-22T02:24:52Z">2023-12-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="从请求对象中获取数据"><a href="#从请求对象中获取数据" class="headerlink" title="从请求对象中获取数据"></a>从请求对象中获取数据</h3><p>每一个视图都有一个必须的参数request，这个request是一个HttpRequest对象，比如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def hello(request):</span><br><span class="line">    return HttpResponse(&#x27;Hello world&#x27;)</span><br></pre></td></tr></table></figure>
-<p>执行视图函数时，可以通过request参数的属性和方法，获取所需的参数</p>
-<h4 id="HttpRequest对象的一些方法和属性"><a href="#HttpRequest对象的一些方法和属性" class="headerlink" title="HttpRequest对象的一些方法和属性"></a>HttpRequest对象的一些方法和属性</h4><table>
-<thead>
-<tr>
-<th align="left">属性&#x2F;方法</th>
-<th align="left">说明</th>
-<th align="left">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">request.path</td>
-<td align="left">完整的路径，不含域名，但是包含其前导斜线</td>
-<td align="left">‘&#x2F;hello&#x2F;‘</td>
-</tr>
-<tr>
-<td align="left">request.get_host()</td>
-<td align="left">主机名&#x2F;域名</td>
-<td align="left">‘127.0.0.1:8000’ &#x2F; ‘<a target="_blank" rel="noopener" href="http://www.baidu.com&/#39;">www.baidu.com&#39;</a></td>
-</tr>
-<tr>
-<td align="left">request.get_full_path()</td>
-<td align="left">包含查询字符串(如果有)的路径</td>
-<td align="left">‘&#x2F;index&#x2F;?name&#x3D;jack’</td>
-</tr>
-<tr>
-<td align="left">request.is_secure()</td>
-<td align="left">通过HTTPS访问时为True，否则为False</td>
-<td align="left">True&#x2F;False</td>
-</tr>
-</tbody></table>
-<h4 id="关于请求的其他信息"><a href="#关于请求的其他信息" class="headerlink" title="关于请求的其他信息"></a>关于请求的其他信息</h4><p>request.META的值是一个Python字典，包含请求的所有HTTP首部，例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">SERVER_PROTOCOL:HTTP/1.1</span><br><span class="line">HTTP_CACHE_CONTROL:max-age=0</span><br><span class="line">PYTHONUNBUFFERED:1</span><br><span class="line">DJANGO_SETTINGS_MODULE:mysite.settings</span><br><span class="line">wsgi.file_wrapper:&lt;class &#x27;wsgiref.util.FileWrapper&#x27;&gt;</span><br><span class="line">wsgi.errors:&lt;_io.TextIOWrapper name=&#x27;&lt;stderr&gt;&#x27; mode=&#x27;w&#x27; encoding=&#x27;UTF-8&#x27;&gt;</span><br><span class="line">HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8</span><br><span class="line">XPC_FLAGS:0x0</span><br><span class="line">__CF_USER_TEXT_ENCODING:0x1F5:0x19:0x34</span><br><span class="line">HTTP_HOST:127.0.0.1:8000</span><br><span class="line">LC_CTYPE:zh_CN.UTF-8</span><br><span class="line">TZ:Asia/Shanghai</span><br><span class="line">PYTHONIOENCODING:UTF-8</span><br><span class="line">wsgi.url_scheme:http</span><br><span class="line">wsgi.input:&lt;_io.BufferedReader name=5&gt;</span><br><span class="line">PYCHARM_MATPLOTLIB_PORT:61701</span><br><span class="line">SERVER_SOFTWARE:WSGIServer/0.2</span><br><span class="line">wsgi.run_once:False</span><br><span class="line">HTTP_ACCEPT_LANGUAGE:zh-CN,zh;q=0.9</span><br><span class="line">PYTHONPATH:/Users/wei/PycharmProjects/mysite:/Applications/PyCharm.app/Contents/helpers/pycharm_matplotlib_backend</span><br><span class="line">CONTENT_TYPE:text/plain</span><br><span class="line">TMPDIR:/var/folders/3s/px2jv1cx29v4g9j3q5lh3df00000gn/T/</span><br><span class="line">XPC_SERVICE_NAME:com.jetbrains.pycharm.5568</span><br><span class="line">SHELL:/bin/bash</span><br><span class="line">Apple_PubSub_Socket_Render:/private/tmp/com.apple.launchd.cU2YPr0kgj/Render</span><br><span class="line">HTTP_COOKIE:sessionid=c73inpxt1lzf7canjdp1r71g04q5lfxo; csrftoken=s89tX1Mdb0iCJJJtgR44TbyBuq2AEU5R6gW4Tprk7G5UZQ2L9S09YIi4XgL0cmSa</span><br><span class="line">HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36</span><br><span class="line">HOME:/Users/wei</span><br><span class="line">PATH:/usr/local/opt/openssl/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/opt/X11/bin:/Users/wei/Library/Android/sdk/build-tools/27.0.3:/Users/wei/Library/Android/sdk/platform-tools:/Users/wei/Library/Android/sdk/tools:/Applications/MAMP/Library/bin</span><br><span class="line">__PYVENV_LAUNCHER__:/Library/Frameworks/Python.framework/Versions/3.5/bin/python3.5</span><br><span class="line">SERVER_NAME:1.0.0.127.in-addr.arpa</span><br><span class="line">VERSIONER_PYTHON_VERSION:2.7</span><br><span class="line">SSH_AUTH_SOCK:/private/tmp/com.apple.launchd.blyfS2VSD5/Listeners</span><br><span class="line">REMOTE_HOST:</span><br><span class="line">QUERY_STRING:</span><br><span class="line">HTTP_UPGRADE_INSECURE_REQUESTS:1</span><br><span class="line">PWD:/Users/wei/PycharmProjects/mysite</span><br><span class="line">RUN_MAIN:true</span><br><span class="line">wsgi.multithread:True</span><br><span class="line">CSRF_COOKIE:s89tX1Mdb0iCJJJtgR44TbyBuq2AEU5R6gW4Tprk7G5UZQ2L9S09YIi4XgL0cmSa</span><br><span class="line">GATEWAY_INTERFACE:CGI/1.1</span><br><span class="line">SERVER_PORT:8000</span><br><span class="line">LOGNAME:wei</span><br><span class="line">HTTP_ACCEPT_ENCODING:gzip, deflate, br</span><br><span class="line">wsgi.multiprocess:False</span><br><span class="line">REMOTE_ADDR:127.0.0.1</span><br><span class="line">wsgi.version:(1, 0)</span><br><span class="line">SCRIPT_NAME:</span><br><span class="line">VERSIONER_PYTHON_PREFER_32_BIT:no</span><br><span class="line">PATH_INFO:/</span><br><span class="line">USER:wei</span><br><span class="line">HTTP_CONNECTION:keep-alive</span><br><span class="line">PYCHARM_HOSTED:1</span><br><span class="line">DISPLAY:/private/tmp/com.apple.launchd.2m8DsWaCsr/org.macosforge.xquartz:0</span><br><span class="line">CONTENT_LENGTH:</span><br><span class="line">REQUEST_METHOD:GET</span><br></pre></td></tr></table></figure>
-<p>当访问request.META不存在的键时，会抛出keyError异常，应当用try&#x2F;except的方式或者get()方法访问：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def index(request):</span><br><span class="line">    try:</span><br><span class="line">        ua = request.META[&#x27;HTTP_USER_AGENT&#x27;]</span><br><span class="line">    except KeyError:</span><br><span class="line">        ua = &#x27;unknown&#x27;</span><br><span class="line">    return HttpResponse(ua)</span><br><span class="line"># 或者</span><br><span class="line">def index(request):</span><br><span class="line">    ua = request.META.get(&#x27;HTTP_USER_AGENT&#x27;,&#x27;unknown&#x27;)</span><br><span class="line">    return HttpResponse(ua)</span><br></pre></td></tr></table></figure>
-<h4 id="request-GET-和-request-POST"><a href="#request-GET-和-request-POST" class="headerlink" title="request.GET 和 request.POST"></a>request.GET 和 request.POST</h4><p>request.GET 和 request.POST包含了用户提交的信息，它们都是类似字典的对象，和标准的Python字典相似，都有get()、keys()、values()方法。通过type()和dir()方法查看GET的类型和属性：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(type(request.GET))</span><br><span class="line"># &lt;class &#x27;django.http.request.QueryDict&#x27;&gt;</span><br><span class="line">print(dir(request.GET))</span><br><span class="line"># [&#x27;appendlist&#x27;, &#x27;clear&#x27;, &#x27;copy&#x27;, &#x27;dict&#x27;, &#x27;encoding&#x27;, &#x27;fromkeys&#x27;, &#x27;get&#x27;, &#x27;getlist&#x27;, &#x27;items&#x27;, &#x27;keys&#x27;, &#x27;lists&#x27;, &#x27;pop&#x27;, &#x27;popitem&#x27;, &#x27;setdefault&#x27;, &#x27;setlist&#x27;, &#x27;setlistdefault&#x27;, &#x27;update&#x27;, &#x27;urlencode&#x27;, &#x27;values&#x27;...]</span><br></pre></td></tr></table></figure>
-<p>在访问request.GET 和 request.POST获取数据时，要注意可能会因为不存在key而抛出异常，要先判断再取值：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def search(request):</span><br><span class="line">    if &#x27;q&#x27; in request.GET and request.GET[&#x27;q&#x27;]:</span><br><span class="line">        message = &#x27;get q value&#x27;</span><br><span class="line">    else:</span><br><span class="line">        message = &#x27;get a none&#x27;</span><br><span class="line">    return HttpResponse(message)</span><br></pre></td></tr></table></figure>
-<h3 id="表单验证"><a href="#表单验证" class="headerlink" title="表单验证"></a>表单验证</h3><p>表单比较简单的时候，可以在视图函数中对用户提交的数据进行验证：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def search(request):</span><br><span class="line">    errors = []</span><br><span class="line">    if &#x27;q&#x27; in request.GET and request.GET[&#x27;q&#x27;]:</span><br><span class="line">        if len(q) &gt; 20:</span><br><span class="line">            errors.append(&#x27;数据过长，请输入小于20个字符进行搜索&#x27;)</span><br><span class="line">        else:</span><br><span class="line">            return render(request,&#x27;search_result.html&#x27;,&#123;...&#125;)</span><br><span class="line">    else:</span><br><span class="line">        errors.append(&#x27;请输入关键字进行搜索&#x27;)</span><br><span class="line">    return render(request,&#x27;search_fom.html&#x27;,&#123;&#x27;errors&#x27;:errors&#125;)</span><br></pre></td></tr></table></figure>
-<p>当表单变得复杂的时候，我们需要处理每一个表单字段，这时应该使用Django中的高级库处理、验证表单</p>
-<h4 id="django-forms"><a href="#django-forms" class="headerlink" title="django.forms"></a>django.forms</h4><p>为要处理的每个HTML表单定义一个Form类。按照约定，把Form类放在单独的forms.py文件中，mysite&#x2F;forms</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from django import forms</span><br><span class="line">class ContactForm(forms.Form):</span><br><span class="line">    subject = forms.CharField()</span><br><span class="line">    email = forms.EmailField(required=False)</span><br><span class="line">    message = forms.CharField()</span><br></pre></td></tr></table></figure>
-<p>这个类能把自己显示为HTML，在django shell命令窗口，执行下面的代码:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from mysite.forms import ContactForm</span><br><span class="line">&gt;&gt;&gt; f = ContactForm()</span><br><span class="line">&gt;&gt;&gt; print(f)</span><br><span class="line">&lt;tr&gt;&lt;th&gt;&lt;label for=&quot;id_subject&quot;&gt;Subject:&lt;/label&gt;&lt;/th&gt;&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;subject&quot; id=&quot;id_subject&quot; required&gt;&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">&lt;tr&gt;&lt;th&gt;&lt;label for=&quot;id_email&quot;&gt;Email:&lt;/label&gt;&lt;/th&gt;&lt;td&gt;&lt;input type=&quot;email&quot; name=&quot;email&quot; id=&quot;id_email&quot;&gt;&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">&lt;tr&gt;&lt;th&gt;&lt;label for=&quot;id_message&quot;&gt;Message:&lt;/label&gt;&lt;/th&gt;&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;message&quot; id=&quot;id_message&quot; required&gt;&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">&gt;&gt;&gt; print(f.as_ul())</span><br><span class="line">&lt;li&gt;&lt;label for=&quot;id_subject&quot;&gt;Subject:&lt;/label&gt; &lt;input type=&quot;text&quot; name=&quot;subject&quot; id=&quot;id_subject&quot; required&gt;&lt;/li&gt;</span><br><span class="line">&lt;li&gt;&lt;label for=&quot;id_email&quot;&gt;Email:&lt;/label&gt; &lt;input type=&quot;email&quot; name=&quot;email&quot; id=&quot;id_email&quot;&gt;&lt;/li&gt;</span><br><span class="line">&lt;li&gt;&lt;label for=&quot;id_message&quot;&gt;Message:&lt;/label&gt; &lt;input type=&quot;text&quot; name=&quot;message&quot; id=&quot;id_message&quot; required&gt;&lt;/li&gt;</span><br><span class="line">&gt;&gt;&gt; print(f.as_p())</span><br><span class="line">&lt;p&gt;&lt;label for=&quot;id_subject&quot;&gt;Subject:&lt;/label&gt; &lt;input type=&quot;text&quot; name=&quot;subject&quot; id=&quot;id_subject&quot; required&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;label for=&quot;id_email&quot;&gt;Email:&lt;/label&gt; &lt;input type=&quot;email&quot; name=&quot;email&quot; id=&quot;id_email&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;label for=&quot;id_message&quot;&gt;Message:&lt;/label&gt; &lt;input type=&quot;text&quot; name=&quot;message&quot; id=&quot;id_message&quot; required&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p>可以只显示某个字段的HTML:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(f[&#x27;email&#x27;])</span><br><span class="line">&lt;input type=&quot;email&quot; name=&quot;email&quot; id=&quot;id_email&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>还能验证数据：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = ContactForm(&#123;&#x27;subject&#x27;:&#x27;Title&#x27;,&#x27;email&#x27;:&#x27;&#x27;,&#x27;message&#x27;:&#x27;hello&#x27;&#125;)</span><br><span class="line">&gt;&gt;&gt; f.is_valid()</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
-<p>当传入不完整的表单时，表单对象就变成无效的了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = ContactForm(&#123;&#x27;subject&#x27;:&#x27;Title&#x27;,&#x27;email&#x27;:&#x27;&#x27;&#125;)</span><br><span class="line">&gt;&gt;&gt; f.is_valid()</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; f.errors</span><br><span class="line">&#123;&#x27;message&#x27;: [&#x27;这个字段是必填项。&#x27;]&#125;</span><br><span class="line">&gt;&gt;&gt; f[&#x27;message&#x27;].errors</span><br><span class="line">[&#x27;这个字段是必填项。&#x27;]</span><br><span class="line">&gt;&gt;&gt; f[&#x27;email&#x27;].errors</span><br><span class="line">[]</span><br></pre></td></tr></table></figure>
-<p>具有有效数据的表单实例有个cleaned_data属性，它的值一个字典</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = ContactForm(&#123;&#x27;subject&#x27;:&#x27;Title&#x27;,&#x27;email&#x27;:&#x27;&#x27;,&#x27;message&#x27;:&#x27;hello&#x27;&#125;)</span><br><span class="line">&gt;&gt;&gt; f.is_valid()</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; f.cleaned_data</span><br><span class="line">&#123;&#x27;subject&#x27;: &#x27;Title&#x27;, &#x27;email&#x27;: &#x27;&#x27;, &#x27;message&#x27;: &#x27;hello&#x27;&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注意，f 在调用 is_valid() 之后才有 cleaned_data属性</strong></p>
-<h4 id="在视图中使用表单对象"><a href="#在视图中使用表单对象" class="headerlink" title="在视图中使用表单对象"></a>在视图中使用表单对象</h4><p>定义一个Form对象，在视图函数中，将request.GET或者request.POST交给Form对象处理</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># Form对象</span><br><span class="line">class LoginForm(forms.Form):</span><br><span class="line">    username = forms.CharField()</span><br><span class="line">    password = forms.CharField()</span><br><span class="line">    </span><br><span class="line"># 视图函数</span><br><span class="line">def login(request):</span><br><span class="line">    if request.method == &#x27;POST&#x27;:</span><br><span class="line">        form = LoginForm(request.POST)</span><br><span class="line">        if form.is_valid():</span><br><span class="line">            user = form.cleaned_data</span><br><span class="line">            # do_login(user[&#x27;username&#x27;], user[&#x27;password&#x27;])</span><br><span class="line">            return HttpResponseRedirect(&#x27;index&#x27;)</span><br><span class="line">    else:</span><br><span class="line">        form = LoginForm()</span><br><span class="line">    return render(request, &#x27;login.html&#x27;, &#123;&#x27;form&#x27;: form&#125;)</span><br><span class="line">    </span><br><span class="line"># 模板</span><br><span class="line">&lt;form action=&quot;&quot; method=&quot;post&quot;&gt;</span><br><span class="line">    &lt;table&gt;</span><br><span class="line">        &#123;&#123; form.as_table &#125;&#125;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">    &#123;% csrf_token %&#125;</span><br><span class="line">    &lt;input type=&quot;submit&quot; value=&quot;Login&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="改变字段渲染方式"><a href="#改变字段渲染方式" class="headerlink" title="改变字段渲染方式"></a>改变字段渲染方式</h4><p>表单框架把各个字段的表现逻辑交给widget参数负责。每种字段的widget参数都有默认值。Field类表示验证逻辑，而widget表示表现逻辑。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from django import forms</span><br><span class="line">class ContactForm(forms.Form):</span><br><span class="line">    subject = forms.CharField()</span><br><span class="line">    email = forms.EmailField(required=False)</span><br><span class="line">    message = forms.CharField(widget=forms.Textarea)</span><br></pre></td></tr></table></figure>
-<p>上面代码中的message字段设置了forms.Textarea值后，显示为&lt;textarea&gt;</p>
-<h4 id="设定最大长度"><a href="#设定最大长度" class="headerlink" title="设定最大长度"></a>设定最大长度</h4><p>为CharField指定max_length参数，用于验证参数长度。此外还有min_length参数。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from django import forms</span><br><span class="line">class ContactForm(forms.Form):</span><br><span class="line">    subject = forms.CharField(max_length=100)</span><br><span class="line">    email = forms.EmailField(required=False)</span><br><span class="line">    message = forms.CharField(widget=forms.Textarea)</span><br></pre></td></tr></table></figure>
-<h4 id="自定义验证规则"><a href="#自定义验证规则" class="headerlink" title="自定义验证规则"></a>自定义验证规则</h4><p>Django的表单系统会自动查找名称以clean_开头、以字段名结尾的方法。如果存在这样的方法，在验证过程中调用。clean_***方法会在指定字段的默认验证逻辑执行完毕后调用。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">from django import forms</span><br><span class="line">class ContactForm(forms.Form):</span><br><span class="line">    subject = forms.CharField(max_length=100)</span><br><span class="line">    email = forms.EmailField(required=False)</span><br><span class="line">    message = forms.CharField(widget=forms.Textarea)</span><br><span class="line">def clean_message(self):</span><br><span class="line">    message = self.cleaned_data[&#x27;message&#x27;]</span><br><span class="line">    num_words = len(message.split())</span><br><span class="line">    if num_words &lt; 4:</span><br><span class="line">        raise forms.ValidationError(&#x27;Not enough words!&#x27;)</span><br><span class="line">    return message</span><br></pre></td></tr></table></figure>
-<h4 id="指定标注"><a href="#指定标注" class="headerlink" title="指定标注"></a>指定标注</h4><p>为字段添加label参数：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">email=forms.EmailField(required=False,label=&#x27;You e-mail address&#x27;)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
